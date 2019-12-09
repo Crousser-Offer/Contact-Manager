@@ -1,71 +1,103 @@
- package util;
 
-        import java.util.Scanner;
+package util;
+import java.util.Scanner;
 
 public class Input {
+    Scanner scanner;
 
-    private Scanner scanner = new Scanner(System.in);
-
-    public String getString(String msg){
-        System.out.println(msg);
-        return scanner.nextLine().trim().toLowerCase();
+    public Input() {
+        scanner = new Scanner(System.in).useDelimiter("\n");
     }
 
-    public String getString(){
-        return getString("Write something: ");
+    public static String Input() {
+        String userInput = getString();
+        return userInput;
     }
 
-    public boolean yesNo(){
-        String input = getString("Type yes/no: ");
-        return input.equals("yes") || input.equals("y");
+    public static String getString() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        String input = scanner.next();
+        return input;
     }
 
-    public int getInt(int min, int max){
-        int num = getInt();
+    public static String getString(String prompt) {
+        System.out.println(prompt);
+        return getString();
+    }
 
-        if(num < min || num > max){
-            System.out.println("Error: outside of the boundaries.");
+    public static boolean yesNo() {
+        String input = getString();
+        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes");
+    }
+
+    public static boolean yesNo(String prompt) {
+        System.out.println(prompt);
+        return yesNo();
+    }
+
+    public int getInt(int min, int max) {
+        String userInput = scanner.next();
+        int num = 0;
+        try{
+            num = Integer.valueOf(userInput);
+        } catch (NumberFormatException ex){
+            System.out.println(ex);
+        }
+        if (num >= min && num <= max) {
+            return num;
+        } else {
+            System.out.println("The number must be between" + min + " and " + max);
             return getInt(min, max);
         }
-
-        return num;
     }
 
-    public int getInt(){
-        int number;
+    public int getInt() {
+        System.out.println("Enter a number: ");
+        String input;
+
         try{
-            number = Integer.valueOf(getString("Give me a number: "));
-        } catch (NumberFormatException e){
-            System.out.println("Invalid input. Make sure it's a number");
-            e.printStackTrace();
+            input = scanner.next();
+            return Integer.valueOf(input);
+        } catch (NumberFormatException ex){
+            System.out.println("Enter a valid integer!");
             return getInt();
         }
-        return number;
     }
 
-    public double getDouble(){
-        double number;
-        try {
-            number = Double.valueOf(getString("Give me a number: "));
-        } catch (NumberFormatException e){
-            System.out.println("That's not a number. ಠ_ಠ");
-            e.printStackTrace();
-            return getDouble();
-        }
-        return number;
+    public int getInt(String prompt) {
+        System.out.println(prompt);
+        return getInt();
     }
 
-    public double getDouble(double min, double max){
-        double num = getDouble();
-
-        if(num < min || num > max){
-            System.out.println("Error: outside of the boundaries.");
+    public double getDouble(double min, double max) {
+        double userDouble = getDouble();
+        if (userDouble >= min && userDouble <= max) {
+            return userDouble;
+        } else {
+            System.out.println("The number must be between " + min + " and " + max);
             return getDouble(min, max);
         }
-
-        return num;
     }
 
+    public double getDouble() {
+        String input;
+        try{
+            input = scanner.next();
+            return Double.valueOf(input);
+        } catch (NumberFormatException ex){
+            System.out.println("Enter a valid integer!");
+            return getDouble();
+        }
+    }
 
+    public double getDouble(String prompt) {
+        System.out.println(prompt);
+        return getDouble();
+    }
 
+    public double getDouble(double min, double max, String prompt) {
+        System.out.println(prompt);
+        return getDouble(min, max);
+    }
 }
+
