@@ -46,7 +46,18 @@ public class Main {
                 String userInput = scan.nextLine();
                 System.out.println("What is your contacts phone number?");
                 String userInput1 = scan.nextLine();
-//                addNewContact();
+                String finalContact = userInput + " | " + userInput1;
+                try {
+                    Path filepath = Paths.get("src", "contacts.txt");
+                    Files.write(
+                            filepath,
+                            Arrays.asList(finalContact),
+                            StandardOpenOption.APPEND
+                    );
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
                 break;
             case 3:
                 System.out.println("Type in the contact you are looking for");
@@ -74,14 +85,9 @@ public class Main {
 
     }
 
-
-
-        } // End of addNewContact()
-
-
 }
 
-        // CRUD app
+// CRUD app
 //        public static void main(String[] args) {
 //
 //                Path dataDirectory = Paths.get(directory);
