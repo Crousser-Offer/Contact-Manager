@@ -51,7 +51,7 @@ public class Main {
                     Path filepath = Paths.get("src", "contacts.txt");
                     Files.write(
                             filepath,
-                            Arrays.asList(finalContact), // list with one item
+                            Arrays.asList(finalContact),
                             StandardOpenOption.APPEND
                     );
                 } catch (IOException ex) {
