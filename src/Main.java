@@ -45,7 +45,9 @@ public class Main {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+
                 System.out.printf("%s was successfully added!", finalContact);
+
                 break;
             case 3:
                 System.out.println("Please enter the contact you would like to search for");
@@ -86,7 +88,7 @@ public class Main {
                     ex.printStackTrace();
                 }
                 break;
-            case 5:
+            case 5: 
                 System.out.println("Goodbye! Thank you for using Contacts Manager");
                 break;
         }
@@ -116,6 +118,7 @@ public class Main {
         }
 
     }
+
 }
 
 // CRUD app
