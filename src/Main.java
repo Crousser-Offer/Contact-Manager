@@ -24,6 +24,7 @@ public class Main {
             showMenu();
 
             int selection = input.getInt(1, 5);
+
             switch (selection) {
                 case 1:
                     showContacts();
