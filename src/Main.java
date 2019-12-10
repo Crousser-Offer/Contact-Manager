@@ -27,12 +27,13 @@ public class Main {
         System.out.println("Welcome to the Contacts Manager!");
 
 
-        System.out.println("Please select an option");
+        System.out.println("Main Menu");
         System.out.println("1 - View contacts");
         System.out.println("2 - Add a new contact");
-        System.out.println("3 - Search a contact by name");
+        System.out.println("3 - Search for a contact by name");
         System.out.println("4 - Delete an existing contact");
         System.out.println("5 - Exit");
+        System.out.println("Please enter a number for your selection");
         int selection = input.getInt(1, 5);
 
 
@@ -57,16 +58,50 @@ public class Main {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                System.out.printf("Your contact: %s was successfully added!",finalContact);
+                System.out.printf("%s was successfully added!", finalContact);
                 break;
             case 3:
-                System.out.println("Type in the contact you are looking for");
+                System.out.println("Please enter the contact you would like to search for");
+                String search = scan.nextLine();
+                try {
+                    Path filepath = Paths.get("src", "contacts.txt");
+                    List<String> newContactList = Files.readAllLines(filepath);
+                    for (String contact : newContactList) {
+                        if (contact.toLowerCase().contains(search.toLowerCase())) {
+                            System.out.println(contact);
+                        }
+                    }
+                } catch (IOException ex){
+                    ex.printStackTrace();
+                }
                 break;
             case 4:
-                System.out.println("Delete a contact");
+                System.out.println("Please Enter the contact's full name that you would like to delete.");
+                String delete = scan.nextLine();
+                try {
+                    Path filepath = Paths.get("src", "contacts.txt");
+                    List<String> tempList = new ArrayList<>();
+                    List<String> newContactList = Files.readAllLines(filepath);
+                    for (String contact : newContactList) {
+                        if (contact.toLowerCase().contains(delete.toLowerCase())) {
+                            System.out.printf("Are you sure you would like to delete %s\n", contact);
+                            Boolean confirm = input.yesNo();
+                            if (confirm) {
+                                System.out.printf("Your contact %s was deleted", contact);
+                                    continue;
+                                }
+                            } else {
+                            tempList.add(contact);
+                        }
+                        Files.write(filepath, tempList);
+                    }
+                } catch (IOException ex){
+                    ex.printStackTrace();
+                }
                 break;
             case 5:
-                System.out.println("Leave Contact Manager");
+                System.out.println("Goodbye! Thank you for using Contacts Manager");
+                break;
         }
     }
 
