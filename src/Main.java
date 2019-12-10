@@ -26,26 +26,23 @@ public class Main {
             int selection = input.getInt(1, 5);
 
             switch (selection) {
-//                show contacts
                 case 1:
                     showContacts();
                     break;
-                case 2:
-//                    add contact
-                    addContact();
 
+                case 2:
+                    addContact();
                     break;
+
                 case 3:
-//                    search contact
                     search();
-//
                     break;
+
                 case 4:
-//                    delete contact
                     deleteContact();
                     break;
+
                 case 5:
-//                    exit
                     System.out.println("Goodbye! Thank you for using Contacts Manager");
                     menu = false;
                     break;
