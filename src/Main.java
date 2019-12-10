@@ -26,12 +26,13 @@ public class Main {
             int selection = input.getInt(1, 5);
 
             switch (selection) {
+//                show contacts
                 case 1:
-                    System.out.println("Here are your contacts");
                     showContacts();
                     System.out.println("\n");
                     break;
                 case 2:
+//                    add contact
                     System.out.println("Please enter first name and  last name of your contact");
                     String userInput = scan.nextLine();
                     System.out.println("What is your contacts phone number?");
@@ -52,6 +53,7 @@ public class Main {
 
                     break;
                 case 3:
+//                    search contact
                     System.out.println("Please enter the contact you would like to search for");
                     String search = scan.nextLine();
                     try {
@@ -67,6 +69,7 @@ public class Main {
                     }
                     break;
                 case 4:
+//                    delete contact
                     System.out.println("Please Enter the contact's name that you would like to delete.");
                     String delete = scan.nextLine();
                     try {
@@ -91,6 +94,7 @@ public class Main {
                     }
                     break;
                 case 5:
+//                    exit
                     System.out.println("Goodbye! Thank you for using Contacts Manager");
                     menu = false;
                     break;
@@ -113,9 +117,11 @@ public class Main {
             Path filepath = Paths.get("src", "contacts.txt");
 
             List<String> getNamePhoneNumber = Files.readAllLines(filepath);
-
+            System.out.println("Here are your contacts:\n");
+            System.out.println("Full Name | Phone number\n" +
+                    "--------------------------");
             for (int i = 0; i < getNamePhoneNumber.size(); i += 1) {
-                System.out.println((i + 1) + ": " + getNamePhoneNumber.get(i));
+                System.out.println(getNamePhoneNumber.get(i));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
