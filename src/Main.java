@@ -49,7 +49,8 @@ public class Main {
                         ex.printStackTrace();
                     }
 
-                    System.out.printf("%s was successfully added!", finalContact);
+                    System.out.printf("%s was successfully added!\n", finalContact);
+
 
                     break;
                 case 3:
@@ -81,8 +82,11 @@ public class Main {
                                 System.out.printf("Are you sure you would like to delete %s, \n Please type yes or no.\n", contact);
                                 Boolean confirm = input.yesNo();
                                 if (confirm) {
-                                    System.out.printf("Your contact %s was deleted", contact);
+                                    System.out.printf("Your contact %s was deleted\n", contact);
+
                                     continue;
+                                } else {
+                                    tempList.add(contact);
                                 }
                             } else {
                                 tempList.add(contact);
