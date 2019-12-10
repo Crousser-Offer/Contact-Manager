@@ -57,7 +57,7 @@ public class Main {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                System.out.printf("Your contact: %s was successfully added!",finalContact);
+
                 break;
             case 3:
                 System.out.println("Type in the contact you are looking for");
@@ -84,6 +84,7 @@ public class Main {
         }
 
     }
+
 }
 
 // CRUD app
