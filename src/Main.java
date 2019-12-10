@@ -29,73 +29,20 @@ public class Main {
 //                show contacts
                 case 1:
                     showContacts();
-                    System.out.println("\n");
                     break;
                 case 2:
 //                    add contact
-                    System.out.println("Please enter first name and  last name of your contact");
-                    String userInput = scan.nextLine();
-                    System.out.println("What is your contacts phone number?");
-                    String userInput1 = scan.nextLine();
-                    String finalContact = userInput + " | " + userInput1;
-                    try {
-                        Path filepath = Paths.get("src", "contacts.txt");
-                        Files.write(
-                                filepath,
-                                Arrays.asList(finalContact),
-                                StandardOpenOption.APPEND
-                        );
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    System.out.printf("%s was successfully added!\n", finalContact);
-
+                    addContact();
 
                     break;
                 case 3:
 //                    search contact
-                    System.out.println("Please enter the contact you would like to search for");
-                    String search = scan.nextLine();
-                    try {
-                        Path filepath = Paths.get("src", "contacts.txt");
-                        List<String> newContactList = Files.readAllLines(filepath);
-                        for (String contact : newContactList) {
-                            if (contact.toLowerCase().contains(search.toLowerCase())) {
-                                System.out.println(contact);
-                            }
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    search();
+//
                     break;
                 case 4:
 //                    delete contact
-                    System.out.println("Please Enter the contact's name that you would like to delete.");
-                    String delete = scan.nextLine();
-                    try {
-                        Path filepath = Paths.get("src", "contacts.txt");
-                        List<String> tempList = new ArrayList<>();
-                        List<String> newContactList = Files.readAllLines(filepath);
-                        for (String contact : newContactList) {
-                            if (contact.toLowerCase().contains(delete.toLowerCase())) {
-                                System.out.printf("Are you sure you would like to delete %s, \n Please type yes or no.\n", contact);
-                                Boolean confirm = input.yesNo();
-                                if (confirm) {
-                                    System.out.printf("Your contact %s was deleted\n", contact);
-
-                                    continue;
-                                } else {
-                                    tempList.add(contact);
-                                }
-                            } else {
-                                tempList.add(contact);
-                            }
-                            Files.write(filepath, tempList);
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    deleteContact();
                     break;
                 case 5:
 //                    exit
@@ -119,7 +66,6 @@ public class Main {
     public static void showContacts() {
         try {
             Path filepath = Paths.get("src", "contacts.txt");
-
             List<String> getNamePhoneNumber = Files.readAllLines(filepath);
             System.out.println("Here are your contacts:\n");
             System.out.println("Full Name | Phone number\n" +
@@ -130,7 +76,72 @@ public class Main {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        System.out.println("\n");
+    }
 
+    public static void search(){
+        System.out.println("Please enter the contact you would like to search for");
+        String search = scan.nextLine();
+        try {
+            Path filepath = Paths.get("src", "contacts.txt");
+            List<String> newContactList = Files.readAllLines(filepath);
+            for (String contact : newContactList) {
+                if (contact.toLowerCase().contains(search.toLowerCase())) {
+                    System.out.println(contact);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void addContact(){
+        System.out.println("Please enter first name and  last name of your contact");
+        String userInput = scan.nextLine();
+        System.out.println("What is your contacts phone number?");
+        String userInput1 = scan.nextLine();
+        String finalContact = userInput + " | " + userInput1;
+        try {
+            Path filepath = Paths.get("src", "contacts.txt");
+            Files.write(
+                    filepath,
+                    Arrays.asList(finalContact),
+                    StandardOpenOption.APPEND
+            );
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.printf("%s was successfully added!\n", finalContact);
+
+    }
+
+    public static void deleteContact(){
+        System.out.println("Please Enter the contact's name that you would like to delete.");
+        String delete = scan.nextLine();
+        try {
+            Path filepath = Paths.get("src", "contacts.txt");
+            List<String> tempList = new ArrayList<>();
+            List<String> newContactList = Files.readAllLines(filepath);
+            for (String contact : newContactList) {
+                if (contact.toLowerCase().contains(delete.toLowerCase())) {
+                    System.out.printf("Are you sure you would like to delete %s, \n Please type yes or no.\n", contact);
+                    Boolean confirm = input.yesNo();
+                    if (confirm) {
+                        System.out.printf("Your contact %s was deleted\n", contact);
+
+                        continue;
+                    } else {
+                        tempList.add(contact);
+                    }
+                } else {
+                    tempList.add(contact);
+                }
+                Files.write(filepath, tempList);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
