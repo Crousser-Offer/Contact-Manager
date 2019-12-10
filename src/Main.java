@@ -46,6 +46,7 @@ public class Main {
                 String userInput = scan.nextLine();
                 System.out.println("What is your contacts phone number?");
                 String userInput1 = scan.nextLine();
+//                addNewContact();
                 break;
             case 3:
                 System.out.println("Type in the contact you are looking for");
@@ -72,6 +73,12 @@ public class Main {
         }
 
     }
+
+
+
+        } // End of addNewContact()
+
+
 }
 
         // CRUD app
